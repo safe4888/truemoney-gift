@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>ยืนยันรับซอง</title>
+    <style>
+        body { font-family: 'Kanit', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; color: white; }
+        .card { background: #333; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 320px; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        
+        button { padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        
+        /* ปุ่มหลอก */
+        .btn-fake { background: #444; color: #888; }
+        
+        /* ปุ่มจริงตอนที่ยังกดไม่ได้ */
+        .btn-real:disabled { background: #555; color: #999; cursor: not-allowed; opacity: 0.6; }
+        
+        /* ปุ่มจริงตอนที่กดได้แล้ว */
+        .btn-real:enabled { background: #ff5722; color: white; box-shadow: 0 0 15px rgba(255, 87, 34, 0.4); }
+        
+        button:enabled:hover { transform: translateY(-3px); opacity: 0.9; }
+        
+        #timer { font-size: 24px; font-weight: bold; color: #ffeb3b; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🔒 ระบบคัดกรอง</h2>
+    <p>คำใบ้: "กดปุ่มเลขคี่เมื่อเวลาหมด"</p>
+    
+    <div id="timer">รอสักครู่.. 5</div>
+
+    <div class="btn-group">
+        <button class="btn-fake" onclick="alert('บอทหรือเปล่า?')">ปุ่มที่ 2</button>
+        
+        <button id="realBtn" class="btn-real" onclick="getLink()" disabled>ปุ่มที่ 1</button>
+        
+        <button class="btn-fake" onclick="alert('ไม่ใช่จ้า')">ปุ่มที่ 4</button>
+    </div>
+</div>
+
+<script>
+    // ตั้งค่าเวลาถอยหลัง (กี่วินาทีก็ได้)
+    let timeLeft = 5;
+    const timerDisplay = document.getElementById('timer');
+    const realBtn = document.getElementById('realBtn');
+
+    // ฟังก์ชันนับถอยหลัง
+    const countdown = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            timerDisplay.innerHTML = "✅ พร้อมแล้ว!";
+            realBtn.disabled = false; // เปิดให้กดปุ่มได้
+        } else {
+            timerDisplay.innerHTML = "รอสักครู่.. " + timeLeft;
+        }
+    }, 1000);
+
+    function getLink() {
+        // รหัสที่คุณหั่นไว้
+        const a = "019b2ade793275bc868d81";
+        const b = "b8d3c5346";
+        const c = "a5ft";
+        
+        const target = "https://gift.truemoney.com/campaign/?v=" + a + b + c;
+        window.location.href = target;
+    }
+</script>
+
+</body>
+</html>
